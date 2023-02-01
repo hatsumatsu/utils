@@ -1,0 +1,10 @@
+{
+  "name": "@superstructure.net/utils",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {},
+  "repository": "hatsumatsu/utils",
+  "license": "MIT"
+}
