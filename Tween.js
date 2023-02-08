@@ -64,7 +64,7 @@ export default class Tween {
       return;
     }
 
-    const progress = easing[this.options.easing](
+    const progress = this.options.easing(
       (time - this.startTime) / this.options.duration
     );
 
