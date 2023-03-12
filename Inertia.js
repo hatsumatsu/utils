@@ -1,4 +1,4 @@
-import { lerp } from './math.js';
+import { lerp } from "./math.js";
 
 export default class Inertia {
   constructor(options = {}) {
@@ -19,7 +19,10 @@ export default class Inertia {
 
     this.isActive = true;
 
-    this.onFrame();
+    cancelAnimationFrame(this.frame);
+    this.frame = requestAnimationFrame(() => {
+      this.onFrame();
+    });
   }
 
   deactivate() {
@@ -63,4 +66,4 @@ export default class Inertia {
   }
 }
 
-export { Inertia }
+export { Inertia };
