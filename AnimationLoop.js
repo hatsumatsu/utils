@@ -80,8 +80,8 @@ class AnimationLoop {
   start() {
     this.isRunning = true;
     cancelAnimationFrame(this.frame);
-    this.frame = requestAnimationFrame(() => {
-      this.onFrame();
+    this.frame = requestAnimationFrame((t) => {
+      this.onFrame(t);
     });
   }
 
@@ -98,25 +98,28 @@ class AnimationLoop {
     clearTimeout(this.debugTimer);
   }
 
-  onFrame() {
+  onFrame(time) {
     if (
       !this.isRunning ||
       !this.callbacks ||
       typeof this.callbacks !== "object"
     ) {
       cancelAnimationFrame(this.frame);
-      this.frame = requestAnimationFrame(() => {
-        this.onFrame();
-      });
+
+      if (!this.options.start) {
+        this.frame = requestAnimationFrame((t) => {
+          this.onFrame(t);
+        });
+      }
 
       return;
     }
 
-    this.callbacks.forEach((c) => c());
+    this.callbacks.forEach((c) => c(time));
 
     cancelAnimationFrame(this.frame);
-    this.frame = requestAnimationFrame(() => {
-      this.onFrame();
+    this.frame = requestAnimationFrame((t) => {
+      this.onFrame(t);
     });
   }
 }
