@@ -99,23 +99,11 @@ class AnimationLoop {
   }
 
   onFrame(time) {
-    if (
-      !this.isRunning ||
-      !this.callbacks ||
-      typeof this.callbacks !== "object"
-    ) {
-      cancelAnimationFrame(this.frame);
+    if (!this.isRunning) return;
 
-      if (!this.options.start) {
-        this.frame = requestAnimationFrame((t) => {
-          this.onFrame(t);
-        });
-      }
-
-      return;
+    if (this.callbacks && typeof this.callbacks === "object") {
+      this.callbacks.forEach((c) => c(time));
     }
-
-    this.callbacks.forEach((c) => c(time));
 
     cancelAnimationFrame(this.frame);
     this.frame = requestAnimationFrame((t) => {
