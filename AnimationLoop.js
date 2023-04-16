@@ -43,6 +43,7 @@ class AnimationLoop {
 
     this.callbacks = [];
     this.frame = null;
+    this.frameTime = undefined;
 
     this.isRunning = false;
 
@@ -101,9 +102,13 @@ class AnimationLoop {
   onFrame(time) {
     if (!this.isRunning) return;
 
+    const delta = this.frameTime ? time - this.frameTime : 0;
+
     if (this.callbacks && typeof this.callbacks === "object") {
-      this.callbacks.forEach((c) => c(time));
+      this.callbacks.forEach((c) => c(time, delta));
     }
+
+    this.frameTime = time;
 
     cancelAnimationFrame(this.frame);
     this.frame = requestAnimationFrame((t) => {
