@@ -23,7 +23,7 @@ class Damper {
 
   update(targetValue, deltaTime) {
     if (Math.abs(this.value - targetValue) <= this.precision) {
-      this.value = this.targetValue;
+      this.value = targetValue;
       return this.value;
     }
 
