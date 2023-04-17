@@ -1,15 +1,11 @@
 import { clamp } from "./math.js";
 
-// easeInOutCubic
-const easeInOutCubic = (t) =>
-  t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
-
 class Damper {
   constructor(
     initialValue = 0,
     smoothTime = 1,
     maxSpeed = Infinity,
-    easing = easeInOutCubic,
+    easing = (t) => 1 / (1 + t + 0.48 * t * t + 0.235 * t * t * t),
     precision = 0.001
   ) {
     this.value = initialValue;
@@ -48,6 +44,7 @@ class Damper {
     }
 
     this.value = newValue;
+
     return this.value;
   }
 
