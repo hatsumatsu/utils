@@ -6,7 +6,7 @@
  * @returns {number} clamped value
  */
 function clamp(value, min, max) {
-  return Math.min( Math.max( value, min ), max );;
+  return Math.min(Math.max(value, min), max);
 }
 
 /**
@@ -17,7 +17,7 @@ function clamp(value, min, max) {
  * @returns {number} Interpolated value
  */
 function lerp(value1, value2, factor) {
-  factor = clamp( factor, 0, 1)
+  factor = clamp(factor, 0, 1);
 
   return factor === 0
     ? value1
@@ -46,14 +46,16 @@ function map(value = 0, input = [0, 0], output = [0, 0]) {
 
 /**
  * Easing functions
+ *
+ * Replace with d3-ease
  */
 const easing = {
   linear: (t) => t,
-  
+
   easeInSine: (t) => 1 - Math.cos((t * Math.PI) / 2),
   easeOutSine: (t) => Math.sin((t * Math.PI) / 2),
   easeInOutSine: (t) => -(Math.cos(Math.PI * t) - 1) / 2,
-  
+
   easeInQuad: (t) => t * t,
   easeOutQuad: (t) => t * (2 - t),
   easeInOutQuad: (t) => (t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t),
@@ -71,7 +73,7 @@ const easing = {
   easeInQuint: (t) => t * t * t * t * t,
   easeOutQuint: (t) => 1 + --t * t * t * t * t,
   easeInOutQuint: (t) =>
-    t < 0.5 ? 16 * t * t * t * t * t : 1 + 16 * --t * t * t * t * t
+    t < 0.5 ? 16 * t * t * t * t * t : 1 + 16 * --t * t * t * t * t,
 };
 
 export { clamp, lerp, map, easing };
