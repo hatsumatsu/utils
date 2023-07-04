@@ -1,3 +1,10 @@
 const nextFrame = () => new Promise(requestAnimationFrame);
 
-export { nextFrame };
+const delay = (duration) =>
+  new Promise((resolve) => {
+    setTimeout(() => {
+      resolve();
+    }, duration);
+  });
+
+export { nextFrame, delay };
