@@ -1,17 +1,37 @@
-function untrailingSlashIt(str) {
-  return str.replace(/\/$/, "");
+/**
+ * Remove trailing slash from string
+ * @param {string} string
+ * @returns {string} string
+ */
+function untrailingSlashIt(string) {
+  return string.replace(/\/$/, "");
 }
 
-function trailingSlashIt(str) {
-  return untrailingSlashIt(str) + "/";
+/**
+ * add trailing slash from string
+ * @param {string} string
+ * @returns {string} string
+ */
+function trailingSlashIt(string) {
+  return untrailingSlashIt(string) + "/";
 }
 
-function unleadingSlashIt(str) {
-  return str.replace(/^\//, "");
+/**
+ * Remove leading slash from string
+ * @param {string} string
+ * @returns {string} string
+ */
+function unleadingSlashIt(string) {
+  return string.replace(/^\//, "");
 }
 
-function leadingSlashIt(str) {
-  return "/" + unleadingSlashIt(str);
+/**
+ * Add leading slash from string
+ * @param {string} string
+ * @returns {string} string
+ */
+function leadingSlashIt(string) {
+  return "/" + unleadingSlashIt(string);
 }
 
 export { trailingSlashIt, untrailingSlashIt, unleadingSlashIt, leadingSlashIt };

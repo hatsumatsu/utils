@@ -1,19 +1,35 @@
 import { lerp } from "./math.js";
 
+/**
+ * Inertia
+ */
 export default class Inertia {
+  /**
+   * Create new Inertia
+   *
+   * @param {object} options
+   * @param {number} options.lerpFactor - amount of inertia
+   * @param {number} options.precision - precision
+   */
   constructor(options = {}) {
+    this.defaults = {
+      lerpFactor: 0.035,
+      precision: 0.1,
+    };
+
+    this.options = Object.assign({}, this.defaults, options);
+
     this.isActive = false;
 
     this.value = null;
-
-    this.lerpFactor = options.lerpFactor || 0.035;
-    this.precision = options.precision || 0.1;
-
     this.frame = null;
   }
 
+  /**
+   * Activate the instance
+   */
   activate() {
-    if (Math.abs(this.value) < this.precision) {
+    if (Math.abs(this.value) < this.options.precision) {
       return;
     }
 
@@ -25,6 +41,9 @@ export default class Inertia {
     });
   }
 
+  /**
+   * Deactivate the instance
+   */
   deactivate() {
     this.isActive = false;
     this.value = 0;
@@ -32,22 +51,32 @@ export default class Inertia {
     cancelAnimationFrame(this.frame);
   }
 
+  /**
+   * Set the value
+   * @param {number} value - target value
+   */
   setValue(value) {
     this.value = value;
   }
 
+  /**
+   * Destroy the instance
+   */
   destroy() {
     this.deactivate();
   }
 
+  /**
+   * Frame loop while the instance is active
+   */
   onFrame() {
     if (!this.isActive) {
       return;
     }
 
-    this.value = lerp(this.value, 0, this.lerpFactor);
+    this.value = lerp(this.value, 0, this.options.lerpFactor);
 
-    if (Math.abs(this.value) < this.precision) {
+    if (Math.abs(this.value) < this.options.precision) {
       this.deactivate();
     }
 
@@ -57,10 +86,18 @@ export default class Inertia {
     });
   }
 
+  /**
+   * Return whether the instance is active
+   * @returns {boolean} whether the instance is active
+   */
   getIsActive() {
     return this.isActive;
   }
 
+  /**
+   * Get current value
+   * @returns {number} current value
+   */
   getValue() {
     return this.value;
   }

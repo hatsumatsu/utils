@@ -32,14 +32,20 @@
  *
  */
 class AnimationLoop {
+  /**
+   * Creates a new AnimationLoop
+   * @param {object} options
+   * @param {boolean} options.debug - Log info on subscriptions
+   * @param {boolean} options.start - Automatically start on first subscription, stop without subscriptions
+   */
   constructor(options = {}) {
     console.log("new AnimationLoop()");
 
-    this.defaultOptions = {
-      debug: false, // log info on subscriptions
-      start: true, // automatically start on first subscription
+    this.defaults = {
+      debug: false,
+      start: true,
     };
-    this.options = { ...this.defaultOptions, ...options };
+    this.options = { ...this.defaults, ...options };
 
     this.callbacks = [];
     this.frame = null;
@@ -58,6 +64,10 @@ class AnimationLoop {
     }
   }
 
+  /**
+   * Subscribe to the loop
+   * @param {function} callback - function to call on every frame
+   */
   subscribe(callback) {
     if (!callback || typeof callback !== "function") return;
 
@@ -68,6 +78,10 @@ class AnimationLoop {
     }
   }
 
+  /**
+   * Unsubscribe from the loop
+   * @param {function} callback - function to not call on every frame anymore
+   */
   unsubscribe(callback) {
     if (!callback || typeof callback !== "function") return;
 
@@ -78,6 +92,9 @@ class AnimationLoop {
     }
   }
 
+  /**
+   * Start the loop
+   */
   start() {
     this.isRunning = true;
     cancelAnimationFrame(this.frame);
@@ -86,11 +103,17 @@ class AnimationLoop {
     });
   }
 
+  /**
+   * Stop the loop
+   */
   stop() {
     this.isRunning = false;
     cancelAnimationFrame(this.frame);
   }
 
+  /**
+   * Destroy the instance
+   */
   destroy() {
     this.stop();
 
@@ -99,6 +122,11 @@ class AnimationLoop {
     clearTimeout(this.debugTimer);
   }
 
+  /**
+   * Function called on every frame
+   *
+   * @param {number} time - Current time useually passed from requestAnimationFrame
+   */
   onFrame(time) {
     if (!this.isRunning) return;
 

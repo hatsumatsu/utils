@@ -1,8 +1,32 @@
+/**
+ * Tween
+ *
+ * ## Usage:
+ *
+ * const animation = new Tween({
+ *   duration: 2000,
+ *   onUpdate: (value, delta, progress ) => {
+ *     console.log( `current value: ${value}`, `animation progress: ${}` );
+ *   }
+ * });
+ *
+ * animation.start( 0, 100 );
+ */
 export default class Tween {
+  /**
+   * Create new Tween
+   *
+   * @param {object} options - Options
+   * @param {number} options.duration - Duration of the animation
+   * @param {function(t:number)} options.easing - Easing function
+   * @param {function(value:number, delta:number, progress:number)} options.onUpdate - Callback when value changes
+   * @param {function(value:number)} options.onCompleted - Callback when animation finishes
+   *
+   */
   constructor(options) {
     this.defaults = {
       duration: 1000,
-      easing: (t) => t, // linear
+      easing: (t) => t,
 
       onUpdate: () => {},
       onCompleted: () => {},
@@ -24,6 +48,11 @@ export default class Tween {
     this.frame = null;
   }
 
+  /**
+   * Start animation
+   * @param {number} startValue - start value
+   * @param {number} targetValue - target value
+   */
   start(startValue, targetValue) {
     this.value = startValue;
     this.startValue = startValue;
@@ -42,6 +71,10 @@ export default class Tween {
     });
   }
 
+  /**
+   * Stop the animation
+   * @param {boolean} finish - Whether the value should be set to the target value
+   */
   stop(finish = false) {
     this.isRunning = false;
 
@@ -59,6 +92,10 @@ export default class Tween {
     this.stop();
   }
 
+  /**
+   * Frame loop while the animation is running
+   * @param {number} time - Current time useually passed from requestAnimationFrame
+   */
   onFrame(time = 0) {
     if (!this.isRunning) {
       return;
@@ -91,21 +128,37 @@ export default class Tween {
     });
   }
 
+  /**
+   * Return if the the animation is running
+   * @returns {boolean} animation is running
+   */
   getIsRunning() {
     return this.isRunning;
   }
 
+  /**
+   * Return current value
+   * @returns {number} current value
+   */
   getValue() {
     return this.value;
   }
 
+  /**
+   * Return current progess
+   * @returns {number} current progess
+   */
   getProgress() {
     return this.progress;
   }
 
+  /**
+   * Return current delta
+   * @returns {number} current delta
+   */
   getDelta() {
     return this.delta;
   }
 }
 
-export { Tween }
+export { Tween };

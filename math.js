@@ -1,8 +1,8 @@
 /**
  * Clamp value
- * @param {number} value   value to clamp
- * @param {number} min   minimum value
- * @param {number} max   maximum value
+ * @param {number} value - value to clamp
+ * @param {number} min - minimum value
+ * @param {number} max - maximum value
  * @returns {number} clamped value
  */
 function clamp(value, min, max) {
@@ -11,9 +11,9 @@ function clamp(value, min, max) {
 
 /**
  * Linear interpolation between to values
- * @param {number} value1   range start
- * @param {number} value2   range end
- * @param {number} lerp factor   amount 0...1
+ * @param {number} value1 - range start
+ * @param {number} value2 - range end
+ * @param {number} lerp factor - amount 0...1
  * @returns {number} Interpolated value
  */
 function lerp(value1, value2, factor) {
@@ -28,13 +28,13 @@ function lerp(value1, value2, factor) {
 
 /**
  * Map value from one range to another
- * @param {number} value   value to map
- * @param {Object[]} input   array of min and max value to map from
- * @param {number} input[0]   minimum value of input range
- * @param {number} input[1]   maximum value of input range
- * @param {Object[]} output   array of min and max value to map to
- * @param {number} output[0]   minimum value of output range
- * @param {number} output[1]   maximum value of output range
+ * @param {number} value - value to map
+ * @param {number[]} input - array of min and max value to map from
+ * @param {number} input[0] - minimum value of input range
+ * @param {number} input[1] - maximum value of input range
+ * @param {number[]} output - array of min and max value to map to
+ * @param {number} output[0] - minimum value of output range
+ * @param {number} output[1] - maximum value of output range
  * @returns {number} Mapped value
  */
 function map(value = 0, input = [0, 0], output = [0, 0]) {
