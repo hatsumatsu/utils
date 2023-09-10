@@ -7,3 +7,4 @@ export * from "./Tween.js";
 export * from "./Inertia.js";
 export * from "./AnimationLoop.js";
 export * from "./Damper.js";
+export * from "./Timer.js";
