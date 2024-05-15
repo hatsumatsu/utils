@@ -45,6 +45,17 @@ function map(value = 0, input = [0, 0], output = [0, 0]) {
 }
 
 /**
+ * Wrap number, also works when n < 0
+ *
+ * @param {number} n
+ * @param {number} m
+ * @returns {number} wrapped number
+ */
+function wrap(n, m) {
+  return ((n % m) + m) % m;
+}
+
+/**
  * Easing functions
  *
  * Replace with d3-ease
@@ -76,4 +87,4 @@ const easing = {
     t < 0.5 ? 16 * t * t * t * t * t : 1 + 16 * --t * t * t * t * t,
 };
 
-export { clamp, lerp, map, easing };
+export { clamp, lerp, map, wrap, easing };
