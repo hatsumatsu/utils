@@ -10,4 +10,10 @@ function getNodeFromString(string) {
   return element.firstChild;
 }
 
-export { getNodeFromString };
+function repaint(element) {
+  if (!element) return;
+
+  element.offsetHeight;
+}
+
+export { getNodeFromString, repaint };
